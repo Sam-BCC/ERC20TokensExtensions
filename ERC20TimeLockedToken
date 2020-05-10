@@ -29,8 +29,8 @@ contract TimeBoundToken is IERC20{
    
 
     constructor () public {
-        name = "PIAIC-BCC Batch-1 Token";
-        symbol = "BCC1";
+        name = "ROCKET";
+        symbol = "RKT";
         decimals = 4;
         owner = msg.sender;
        
