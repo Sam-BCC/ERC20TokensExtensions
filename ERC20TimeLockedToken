@@ -4,7 +4,7 @@ pragma solidity ^0.6.0;
 import "./IERC20.sol";
 import "./SafeMath.sol";
 // SafeMath library will allow to use arthemtic operation on Uint256
-contract TimeBoundToken is IERC20{
+contract TimeLockedToken is IERC20{
     //Extending Uint256 with SafeMath Library.
     using SafeMath for uint256;
     
