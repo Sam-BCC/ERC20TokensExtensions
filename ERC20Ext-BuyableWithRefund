@@ -28,8 +28,8 @@ contract BuyableTokenWithRefund is IERC20{
     address public delegate;
  
     constructor () public {
-        name = "PIAIC-BCC Batch-1 Token";
-        symbol = "BCC1";
+        name = "Rocket";
+        symbol = "RKT";
         decimals = 18;
         owner = msg.sender;
         weiReceipt = 0x93E2Ec2BD2c5C17e1E44ABaCCa955a26B319c7Ca;
