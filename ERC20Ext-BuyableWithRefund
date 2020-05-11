@@ -204,7 +204,7 @@ contract BuyableTokenWithRefund is IERC20{
        
         uint256 tokenBuyingRate = tokenRate; // the rate at which the purchase was made
         
-        uint256 tokensLeft = tokenUnitsToBuy; // tokens left after refund
+        uint256 tokensLeft = tokenUnitsToBuy; // tokens left after any refund
       
       _balances[buyer] =  _balances[buyer].add(tokenUnitsToBuy); // adds the tokens bought to buyer balance
       
@@ -265,7 +265,7 @@ contract BuyableTokenWithRefund is IERC20{
         
         weiTransfer(refundee, weiRefund); // transfer wei from weiReceipt address to refundee 
        
-        //update the tokenUnitsToBuy against the address: subtract the refunded amount of tokenUnitsToBuy 
+        //update the tokenLeft against the address: subtract the refunded amount of tokensLeft 
         buyerDetails[refundee].tokensLeft = buyerDetails[refundee].tokensLeft.sub(tokenRefund);
     }
         
