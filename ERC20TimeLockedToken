@@ -4,7 +4,7 @@ pragma solidity ^0.6.0;
 import "./IERC20.sol";
 import "./SafeMath.sol";
 // SafeMath library will allow to use arthemtic operation on Uint256
-contract TimeLockedToken is IERC20{
+contract TimeBoundToken is IERC20{
     //Extending Uint256 with SafeMath Library.
     using SafeMath for uint256;
     
@@ -24,24 +24,25 @@ contract TimeLockedToken is IERC20{
     string public name;
     string public symbol;
     uint8 public decimals;
-   
+    uint256 releaseTime;
     
    
 
     constructor () public {
-        name = "ROCKET";
-        symbol = "RKT";
-        decimals = 4;
+        name = "PIAIC-BCC Batch-1 Token";
+        symbol = "BCC1";
+        decimals = 18;
         owner = msg.sender;
-       
+        releaseTime = 1589568807;
         
         //1 million tokens to be generated
         //1 * (10**18)  = 1;
         
         _totalSupply = 1000000 * (10 ** uint256(decimals));
         
+         
+         
         //transfer total supply to owner
-        _balances[owner] = _totalSupply;
         
         //fire an event on transfer of tokens
         emit Transfer(address(this),owner,_totalSupply);
@@ -158,13 +159,17 @@ contract TimeLockedToken is IERC20{
         _;
     }
 
-// Time locking a specified amount of tokens to a particular beneficiary address
-   function release() external {
-        uint256 releaseTime = 1588795027;
-        require(block.timestamp >= releaseTime , "TokenTimelock: current time is before release time");
-        address payable beneficiary = 0x5BDC8BD0b1aB5b3eD42E6F17C7898f212E2BB516;
-        uint256 amountLocked = 1000;
-        require(_balances[owner] > amountLocked,"BCC1: transfer amount exceeds balance");
-        _balances[beneficiary] = _balances[beneficiary].add(amountLocked);
-        _balances[owner] = _balances[owner].sub(amountLocked);
+    function ChangeReleaseTime (uint256 time) onlyOwner public returns (uint256) {
+        return releaseTime = time;
     }
+    
+     function release () onlyOwner public {
+         require (block.timestamp >= releaseTime);
+        _balances[owner] = _totalSupply;
+     }
+}
+     
+     
+     
+     
+     
